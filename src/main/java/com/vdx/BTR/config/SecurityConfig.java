@@ -1,6 +1,6 @@
 package com.vdx.BTR.config;
 
-import com.vdx.BTR.security.CustomUserDetailsService;
+//import com.vdx.BTR.security.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
