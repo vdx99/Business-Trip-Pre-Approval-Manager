@@ -44,7 +44,7 @@ public class SecurityConfig {
                 )
                 .formLogin(form -> form
                         .permitAll()
-                        .defaultSuccessUrl("/dashboard", true)
+                        .defaultSuccessUrl("/btr/dashboard", true)
                 )
                 .logout(logout -> logout.permitAll());
 

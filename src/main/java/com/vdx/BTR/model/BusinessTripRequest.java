@@ -3,6 +3,8 @@ package com.vdx.BTR.model;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "business_trip_requests")
@@ -18,9 +20,11 @@ public class BusinessTripRequest {
     @Column(nullable = false, length = 1000)
     private String tripReason;
 
+    @NotNull(message = "Start date is required")
     @Column(nullable = false)
     private LocalDate startDate;
 
+    @NotNull(message = "End date is required")
     @Column(nullable = false)
     private LocalDate endDate;
 
@@ -31,6 +35,8 @@ public class BusinessTripRequest {
     private String destination;
 
     @Column(nullable = false, precision = 15, scale = 2)
+    @NotNull(message = "Amount is required")
+    @DecimalMin(value = "0.0", inclusive = true, message = "Amount must be >= 0")
     private BigDecimal anticipatedExpenseAmount;
 
     @Column(length = 2000)

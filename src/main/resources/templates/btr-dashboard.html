@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>My BTRs</title>
+</head>
+<body>
+<h1>My Business Trip Requests</h1>
+
+<a th:href="@{/btr/new}">New BTR</a>
+<br/><br/>
+
+<table border="1">
+  <tr>
+    <th>Title</th>
+    <th>Destination</th>
+    <th>Start</th>
+    <th>End</th>
+    <th>Amount</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
+  <tr th:each="btr : ${btrs}">
+    <td th:text="${btr.title}"></td>
+    <td th:text="${btr.destination}"></td>
+    <td th:text="${btr.startDate}"></td>
+    <td th:text="${btr.endDate}"></td>
+    <td th:text="${btr.anticipatedExpenseAmount}"></td>
+    <td th:text="${btr.status}"></td>
+    <td>
+      <a th:href="@{'/btr/delete/' + ${btr.id}}"
+         onclick="return confirm('Delete this BTR?');">
+        Delete
+      </a>
+    </td>
+  </tr>
+</table>
+
+
+<a th:href="@{/logout}">Logout</a>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>New BTR</title>
+</head>
+<body>
+<h1>New Business Trip Request</h1>
+
+<form th:action="@{/btr/new}" th:object="${btr}" method="post">
+
+  <label>Title:</label>
+  <input th:field="*{title}" /><br/>
+
+  <label>Trip reason:</label>
+  <input th:field="*{tripReason}" /><br/>
+
+  <label>Start date:</label>
+  <input type="date" th:field="*{startDate}" /><br/>
+  <p th:if="${#fields.hasErrors('startDate')}"
+     th:errors="*{startDate}"
+     style="color:red"></p>
+
+  <label>End date:</label>
+  <input type="date" th:field="*{endDate}" /><br/>
+  <p th:if="${#fields.hasErrors('endDate')}"
+     th:errors="*{endDate}"
+     style="color:red"></p>
+
+  <label>Start location:</label>
+  <input th:field="*{startLocation}" /><br/>
+
+  <label>Destination:</label>
+  <input th:field="*{destination}" /><br/>
+
+  <label>Anticipated expense amount:</label>
+  <input type="number" step="0.01" th:field="*{anticipatedExpenseAmount}" /><br/>
+  <p th:if="${#fields.hasErrors('anticipatedExpenseAmount')}"
+     th:errors="*{anticipatedExpenseAmount}"
+     style="color:red"></p>
+
+  <label>Comments:</label>
+  <textarea th:field="*{comments}"></textarea><br/>
+
+  <button type="submit">Save</button>
+</form>
+
+<a th:href="@{/btr/dashboard}">Back</a>
+</body>
+</html>
