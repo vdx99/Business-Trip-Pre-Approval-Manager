@@ -1,12 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <title>My BTRs</title>
 </head>
 <body>
+
 <h1>My Business Trip Requests</h1>
 
 <a th:href="@{/btr/new}">New BTR</a>
+<br/><br/>
+
+<a th:href="@{/approver/dashboard}"
+   sec:authorize="hasRole('ROLE_APPROVER')">
+  Approver Dashboard
+</a>
+
 <br/><br/>
 
 <table border="1">

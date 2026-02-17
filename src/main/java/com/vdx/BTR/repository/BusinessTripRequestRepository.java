@@ -9,4 +9,7 @@ import java.util.List;
 public interface BusinessTripRequestRepository extends JpaRepository<BusinessTripRequest, Long> {
 
     List<BusinessTripRequest> findByUser(User user);
+    // BusinessTripRequestRepository
+    List<BusinessTripRequest> findByStatus(String status);
+
 }

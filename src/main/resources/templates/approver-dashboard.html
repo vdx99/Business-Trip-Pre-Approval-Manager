@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Approver Dashboard</title>
+</head>
+<body>
+<h1>Approver Dashboard</h1>
+
+<table border="1">
+    <tr>
+        <th>User</th>
+        <th>Title</th>
+        <th>Destination</th>
+        <th>Amount</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="btr : ${btrs}">
+        <td th:text="${btr.user.username}"></td>
+        <td th:text="${btr.title}"></td>
+        <td th:text="${btr.destination}"></td>
+        <td th:text="${btr.anticipatedExpenseAmount}"></td>
+        <td th:text="${btr.status}"></td>
+        <td>
+            <form th:action="@{'/approver/' + ${btr.id} + '/approve'}" method="post" style="display:inline">
+                <button type="submit">Approve</button>
+            </form>
+            <form th:action="@{'/approver/' + ${btr.id} + '/reject'}" method="post" style="display:inline">
+                <button type="submit">Reject</button>
+            </form>
+            <form th:action="@{'/approver/' + ${btr.id} + '/delete'}" method="post" style="display:inline">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<br/>
+<a th:href="@{/btr/dashboard}">Back to my BTRs</a> |
+<a th:href="@{/logout}">Logout</a>
+</body>
+</html>

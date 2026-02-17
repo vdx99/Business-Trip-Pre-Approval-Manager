@@ -9,9 +9,16 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import com.vdx.BTR.security.CustomLoginSuccessHandler;
 
 @Configuration
 public class SecurityConfig {
+
+    private final CustomLoginSuccessHandler loginSuccessHandler;
+
+    public SecurityConfig(CustomLoginSuccessHandler loginSuccessHandler) {
+        this.loginSuccessHandler = loginSuccessHandler;
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -39,12 +46,13 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/register").permitAll()
+                        .requestMatchers("/approver/**").hasRole("APPROVER")
                         .requestMatchers("/login").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .permitAll()
-                        .defaultSuccessUrl("/btr/dashboard", true)
+                        .successHandler(loginSuccessHandler)
                 )
                 .logout(logout -> logout.permitAll());
 
@@ -54,4 +62,6 @@ public class SecurityConfig {
 
         return http.build();
     }
+
+
 }
