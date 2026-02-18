@@ -15,6 +15,17 @@
    sec:authorize="hasRole('ROLE_APPROVER')">
   Approver Dashboard
 </a>
+<br/>
+
+<a th:href="@{/admin/users}"
+   sec:authorize="hasRole('ROLE_ADMIN')">
+  Admin Panel
+</a>
+
+<a th:href="@{/admin/settings}"
+   sec:authorize="hasRole('ROLE_ADMIN')">
+  Admin Settings
+</a>
 
 <br/><br/>
 

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin - Settings</title>
+</head>
+<body>
+<h1>Admin - Settings</h1>
+
+<form th:action="@{/admin/settings}" method="post">
+    <label>Approval threshold (EUR):</label>
+    <input type="number" step="0.01"
+           name="approvalThreshold"
+           th:value="${settings.approvalThreshold}" />
+    <button type="submit">Save</button>
+</form>
+
+<br/>
+<a th:href="@{/admin/users}">Back to users</a> |
+<a th:href="@{/btr/dashboard}">Back to dashboard</a>
+</body>
+</html>

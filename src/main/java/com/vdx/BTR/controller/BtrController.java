@@ -4,6 +4,7 @@ import com.vdx.BTR.model.BusinessTripRequest;
 import com.vdx.BTR.model.User;
 import com.vdx.BTR.repository.BusinessTripRequestRepository;
 import com.vdx.BTR.service.CurrentUserService;
+import com.vdx.BTR.service.SettingsService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -20,15 +21,18 @@ public class BtrController {
 
     private final BusinessTripRequestRepository btrRepository;
     private final CurrentUserService currentUserService;
+    private final SettingsService settingsService;
 
     public BtrController(BusinessTripRequestRepository btrRepository,
-                         CurrentUserService currentUserService) {
+                         CurrentUserService currentUserService,
+                         SettingsService settingsService) {
         this.btrRepository = btrRepository;
         this.currentUserService = currentUserService;
+        this.settingsService = settingsService;
     }
 
-    @Value("${app.approval.threshold}")
-    private BigDecimal approvalThreshold; //from properties
+    //@Value("${app.approval.threshold}")
+    //private BigDecimal approvalThreshold; //from properties
 
     // Dashboard: lista własnych BTR
     @GetMapping("/dashboard")
@@ -71,6 +75,7 @@ public class BtrController {
         btr.setUser(user);
 
         // AUTOMATYCZNE REGUŁY
+        BigDecimal approvalThreshold = settingsService.getSettings().getApprovalThreshold();
         BigDecimal amount = btr.getAnticipatedExpenseAmount();
 
         // 1) C-Level Management -> zawsze APPROVED
