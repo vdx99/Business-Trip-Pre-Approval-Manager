@@ -86,7 +86,10 @@ As an Admin: adjust roles for existing users and change the approval threshold f
 
 ## Possible Improvements
 Add REST API endpoints for integration with other systems.
+
 Introduce pagination and filtering for large BTR lists.
+
 Add email notifications when a request changes status.
+
 Add tests (unit and integration) for controllers, services and security configuration.
 
